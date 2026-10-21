@@ -143,11 +143,53 @@ python ingest.py
 
 This populates the local SQLite and ChromaDB databases.
 
+
 ### 6. Run the agent
+
+Start the interactive command-line interface:
 
 ```bash
 python agent.py
 ```
+
+The agent will display:
+
+```text
+Game Insights Agent. Ctrl+C to quit.
+
+Question:
+```
+
+Enter a natural-language question:
+
+```text
+Which three games have the highest positive review percentages?
+```
+
+The agent uses Claude to select the appropriate tools,
+queries the local databases, verifies submitted evidence,
+and returns a structured JSON response.
+
+To ask another question, enter it at the next prompt.
+
+Press Ctrl+C to exit.
+
+### Understanding the Output
+
+The JSON response includes fields such as:
+
+- `answer`: The generated response.
+- `evidence`: Supporting information.
+- `confidence`: The agent's reported confidence level.
+- `review_quotes`: Submitted review quotations.
+- `sql_evidence`: Submitted numerical evidence.
+- `review_verification`: Results of review checks.
+- `sql_verification`: Results of numerical evidence checks.
+- `verification_status`: Whether the implemented checks passed.
+
+A `verification_status` of `passed` means the submitted
+evidence satisfied the implemented checks. It does not
+guarantee that every statement in the answer is correct.
 
 ## Testing
 
